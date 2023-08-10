@@ -32,6 +32,11 @@ class RoleResource extends Resource
                     Forms\Components\TextInput::make('name')
                         ->minLength(2)
                         ->maxLength(255)
+                        ->unique(ignoreRecord: true),
+                    Forms\Components\Select::make('permissions')
+                        ->multiple()
+                        ->relationship('permissions', 'name')
+                        ->preload()
                 ])
             ]);
     }
@@ -40,13 +45,17 @@ class RoleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('id')->sortable(),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime('d-m-Y')->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

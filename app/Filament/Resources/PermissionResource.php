@@ -32,7 +32,7 @@ class PermissionResource extends Resource
                         ->minLength(2)
                         ->maxLength(255)
                         ->required()
-                        ->unique()
+                        ->unique(ignoreRecord: true),
                 ])
             ]);
     }
@@ -41,13 +41,17 @@ class PermissionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('id')->sortable(),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime('d-m-Y')->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
