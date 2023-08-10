@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
@@ -44,8 +44,8 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
     ];
 
-    public function canAccessFilament(): bool
-    {
-        return $this->hasRole('Admin', 'Writer', 'Moderator');
-    }
+//    public function canAccessFilament(): bool
+//    {
+//        return $this->hasRole('Admin', 'Writer', 'Moderator');
+//    }
 }
