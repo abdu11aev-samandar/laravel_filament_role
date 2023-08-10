@@ -45,6 +45,14 @@ class UserResource extends Resource
                         ->dehydrated(fn($state) => filled($state))
                         ->required(fn(Page $page) => ($page instanceof Pages\CreateUser))
                         ->maxLength(255),
+                    Forms\Components\Select::make('roles')
+                        ->multiple()
+                        ->relationship('roles', 'name')
+                        ->preload(),
+                    Forms\Components\Select::make('permissions')
+                        ->multiple()
+                        ->relationship('permissions', 'name')
+                        ->preload()
                 ])->columns(2)
             ]);
     }
