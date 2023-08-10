@@ -10,10 +10,20 @@ class EditRole extends EditRecord
 {
     protected static string $resource = RoleResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return self::getResource()::getUrl('index');
+    }
+
     protected function getActions(): array
     {
         return [
             Actions\DeleteAction::make(),
         ];
+    }
+
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'Role updated';
     }
 }

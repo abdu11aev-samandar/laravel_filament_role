@@ -10,10 +10,20 @@ class EditUser extends EditRecord
 {
     protected static string $resource = UserResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return self::getResource()::getUrl('index');
+    }
+
     protected function getActions(): array
     {
         return [
             Actions\DeleteAction::make(),
         ];
+    }
+
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'User updated';
     }
 }

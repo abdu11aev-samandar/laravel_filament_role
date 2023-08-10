@@ -14,4 +14,9 @@ class CreateUser extends CreateRecord
     {
         return self::getResource()::getUrl('index');
     }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'User registered';
+    }
 }

@@ -14,4 +14,9 @@ class CreateRole extends CreateRecord
     {
         return self::getResource()::getUrl('index');
     }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return 'Role created';
+    }
 }
